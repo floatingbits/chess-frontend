@@ -4,5 +4,5 @@
 import {Piece} from './piece';
 export interface Field {
     color: string;
-    piece?: Piece;
+    pieces: Piece[];
 }

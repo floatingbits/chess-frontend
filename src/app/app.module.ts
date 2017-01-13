@@ -10,7 +10,7 @@ import { MatchComponent } from './match/match.component';
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
-
+import { DragulaModule } from 'ng2-dragula';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +21,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+      DragulaModule,
 
   ],
   providers: [
