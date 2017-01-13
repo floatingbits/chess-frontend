@@ -1,0 +1,11 @@
+.board .field {
+    text-align: center;
+    width: 50px;
+}
+.board .row {
+    height: 50px;
+}
+.field.black {
+    background-color: #777;
+}
+

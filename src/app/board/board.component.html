@@ -1,0 +1,9 @@
+<div class="board">
+    <table>
+        <tr class="row" *ngFor="let row of rows">
+            <td class="field {{field.color}}" *ngFor="let field of row.fields">
+                <span class="piece {{field.piece.color}}" *ngIf="field.piece" [innerHtml]="field.piece.char"></span>
+            </td>
+        </tr>
+    </table>
+</div>
