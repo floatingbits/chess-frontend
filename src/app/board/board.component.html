@@ -1,9 +1,0 @@
-<div class="board">
-    <table>
-        <tr class="row" *ngFor="let row of rows">
-            <td class="field {{field.color}}" *ngFor="let field of row.fields" [dragula]='"card-bag"' [dragulaModel]='field.pieces'>
-                <span class="piece {{piece.color}}"  *ngFor="let piece of field.piece" [innerHtml]="piece.char"></span>
-            </td>
-        </tr>
-    </table>
-</div>

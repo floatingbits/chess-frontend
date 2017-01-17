@@ -3,6 +3,6 @@
  */
 
 export interface Piece {
-    color: string;
     char: string;
+    lifted?: boolean;
 }

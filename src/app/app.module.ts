@@ -5,8 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
-import { BoardComponent } from './board/board.component';
-import { MatchComponent } from './match/match.component';
+import { BoardComponent } from './chess/board.component';
+import { MatchComponent } from './chess/match.component';
 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 

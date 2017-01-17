@@ -5,4 +5,5 @@ import {Piece} from './piece';
 export interface Field {
     color: string;
     pieces: Piece[];
+    sanCode: string;
 }

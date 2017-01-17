@@ -1,0 +1,10 @@
+<div class="match-chooser">
+    <div class="match" *ngFor="let match of matches">
+        <span (click)="playMatch(match)">{{match.description}}</span>
+    </div>
+        <form>
+            <input #description type="text" >
+            <button (click)="createMatch(description.value)">New Match</button>
+        </form>
+</div>
+<board></board>
