@@ -60,6 +60,14 @@ export class MatchComponent implements OnInit {
         console.log(match.fenString);
         this.matchService.playMatch(match);
     }
+    deleteMatch(match: Match) {
+        this.matchService.deleteMatch(match).subscribe();
+        this.matches.forEach((m,i) => {
+            if (m.id == match.id) {
+                this.matches.splice(i,1);
+            }
+        });
+    }
 
     createMatch(description: string) {
         this.matchService.createMatch(description).subscribe(

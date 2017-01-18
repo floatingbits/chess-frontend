@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack --progress",
     "watch": "npm run build -- --watch",
-    "server": "webpack-dev-server --inline --progress --port 3000 --content-base src",
+    "server": "webpack-dev-server --config webpack.dev.js --inline --progress --port 3000 --content-base src",
     "start": "npm run server"
   },
   "contributors": [
@@ -27,9 +27,10 @@
     "@angular/upgrade": "~2.2.1",
     "angular2-in-memory-web-api": "0.0.21",
     "bootstrap": "^3.3.7",
-    "chess" : "git://github.com/floatingbits/node-chess.git",
+    "chess": "git://github.com/floatingbits/node-chess.git",
     "core-js": "^2.4.1",
     "dragula": "^3.7.2",
+    "environment-variables-webpack-plugin": "^1.1.0",
     "ie-shim": "^0.1.0",
     "ng2-dragula": "^1.2.2",
     "reflect-metadata": "^0.1.3",

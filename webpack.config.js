@@ -2,6 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 var webpackMerge = require('webpack-merge');
 
+
 // Webpack Config
 var webpackConfig = {
   entry: {
@@ -21,7 +22,7 @@ var webpackConfig = {
       {
         // your Angular Async Route paths relative to this root directory
       }
-    ),
+    )
   ],
 
   module: {

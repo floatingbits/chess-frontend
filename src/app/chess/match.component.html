@@ -1,6 +1,6 @@
 <div class="match-chooser">
     <div class="match" *ngFor="let match of matches">
-        <span (click)="playMatch(match)">{{match.description}}</span>
+        <span (click)="playMatch(match)">{{match.description}}</span><span *ngIf="match!=matchService.getCurrentMatch()" (click)="deleteMatch(match)">X</span>
     </div>
     <form *ngIf="initialized">
         <input #description type="text" >

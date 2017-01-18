@@ -47,6 +47,9 @@ export class MatchService {
         });
         this.newPositionSource.next(match.fenString);
     }
+    deleteMatch(match: Match) {
+        return this.matchPersistence.deleteMatch(match.id);
+    }
 
     getCurrentSide() {
         return this.chessLogic.game.getCurrentSide().name;

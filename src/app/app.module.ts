@@ -11,6 +11,11 @@ import { MatchComponent } from './chess/match.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { DragulaModule } from 'ng2-dragula';
+import { AppConfig } from "./app.config";
+
+var appConfig = new AppConfig();
+appConfig.apiEndpoint = "%%apiUrl%%";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +31,7 @@ import { DragulaModule } from 'ng2-dragula';
 
   ],
   providers: [
-
+      { provide: AppConfig, useValue: appConfig }
   ],
   bootstrap: [ AppComponent ]
 })
