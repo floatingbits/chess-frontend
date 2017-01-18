@@ -31,16 +31,17 @@ const DRAGULA_BAG_NAME: string = "piece-bag";
 })
 export class BoardComponent implements OnInit, OnDestroy {
     rows: Row[];
-    subscription: ISubscription;
+    positionSubscription: ISubscription;
 
     constructor (private dragulaService: DragulaService, private matchService: MatchService) {
-        this.subscription = matchService.newPosition$.subscribe(
+        this.initBoard();
+        this.positionSubscription = matchService.newPosition$.subscribe(
             fenString => {
                 this.movePiecesAccordingToFEN(fenString);
             });
 
-        this.initBoard();
-        this.initPieces();
+
+
         dragulaService.dropModel.subscribe((value) => {
             let source = value[3];
             let target = value[2];
@@ -107,6 +108,9 @@ export class BoardComponent implements OnInit, OnDestroy {
                 let sourceSquare = source.getAttribute('sancode');
                 let targetSquare = target.getAttribute('sancode');
                 return this.matchService.isMoveValid(sourceSquare + targetSquare);
+            },
+            drag: (el, target, source, sibling):boolean => {
+                return !this.matchService.isAIThinking();
             }
         });
     }
@@ -137,11 +141,8 @@ export class BoardComponent implements OnInit, OnDestroy {
         }
     }
 
-    private initPieces() {
-        this.movePiecesAccordingToFEN(START_FEN);
-    }
-
     private movePiecesAccordingToFEN(fenString: string) {
+
         let positions: string = fenString.split(' ')[0];
         let rowNumber: number = 7;
         positions.split('/').forEach((rowString) => {
@@ -172,7 +173,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
     ngOnDestroy() {
         // prevent memory leak when component destroyed
-        this.subscription.unsubscribe();
+        this.positionSubscription.unsubscribe();
     }
 }
 
