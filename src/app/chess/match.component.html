@@ -2,14 +2,28 @@
     <div class="match" *ngFor="let match of matches">
         <span (click)="playMatch(match)">{{match.description}}</span>
     </div>
-        <form>
-            <input #description type="text" >
-            <button (click)="createMatch(description.value)">New Match</button>
+    <form *ngIf="initialized">
+        <input #description type="text" >
+        <button (click)="createMatch(description.value)">New Match</button>
+        <fieldset>
+            <legend>AI</legend>
             <label for="whiteAI">White AI</label>
             <input #whiteAI id="whiteAI" type="checkbox" [(ngModel)]="activeAIs.white" (change)="aiChanged()" [ngModelOptions]="{standalone: true}">
             <label for="blackAI">Black AI</label>
             <input #blackAI id="blackAI" type="checkbox" [(ngModel)]="activeAIs.black" (change)="aiChanged()" [ngModelOptions]="{standalone: true}">
-        </form>
+        </fieldset>
+
+    </form>
+    <div *ngIf="!initialized">
+        <p>Loading Matches</p>
+    </div>
 
 </div>
-<board></board>
+<board ></board>
+<div *ngIf="matchService.getCurrentMatch()" class="match-state">
+    <h3>{{matchService.getCurrentMatch().description}}</h3>
+    <h4 *ngIf="matchService.isCheck()">CHECK</h4>
+    <h4 *ngIf="matchService.isCheckmate()">CHECKMATE</h4>
+    <p>Current Side: {{matchService.getCurrentSide()}}</p>
+    <p>Number of previous moves: {{matchService.getNumberOfMoves()}}</p>
+</div>
