@@ -12,7 +12,12 @@ import {ChessAIService} from './chess-ai.service';
 })
 export class MatchComponent implements OnInit {
     private matches: Match[];
+    private activeAIs: any;
     constructor (private matchService: MatchService) {
+        this.activeAIs = {
+            black: false,
+            white: false
+        }
         this.matchService.moveMade$.subscribe(
             (moveString) => {
                 if (this.isAI(this.matchService.getCurrentSide())) {
@@ -21,9 +26,14 @@ export class MatchComponent implements OnInit {
             }
         );
     }
+    aiChanged() {
+        if (this.isAI(this.matchService.getCurrentSide()) && !this.matchService.isAIThinking()) {
+            this.matchService.playBestMove();
+        }
+    }
+
     private isAI(sideString: string) {
-        console.log(sideString);
-        return sideString == 'black';
+        return this.activeAIs[sideString];
     }
     ngOnInit() {
         this.matchService.getMatches().subscribe((matches) => this.matches = <Match[]>matches);

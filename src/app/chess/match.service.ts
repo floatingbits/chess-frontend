@@ -12,7 +12,7 @@ export class MatchService {
     private chessLogic;
     private newPositionSource = new Subject<string>();
     private moveMadeSource = new Subject<string>();
-
+    private isThinking: boolean;
     newPosition$: Observable<string>;
     moveMade$: Observable<string>;
 
@@ -20,6 +20,7 @@ export class MatchService {
         this.newPosition$ = this.newPositionSource.asObservable();
         this.moveMade$= this.moveMadeSource.asObservable();
         this.chessLogic = chess.create();
+        this.isThinking = false;
     }
     playMatch(match: Match) {
 
@@ -44,13 +45,16 @@ export class MatchService {
     getCurrentSide() {
         return this.chessLogic.game.getCurrentSide().name;
     }
+    isAIThinking() {
+        return this.isThinking;
+    }
 
     makeMove(sourceSan: string, targetSan: string) {
-        console.log(sourceSan);
-        console.log(targetSan);
-        this.chessLogic.move(this.getNotatedKey(sourceSan +  targetSan));
+
         this.matchPersistence.storeMove(this.match.id, sourceSan + targetSan).subscribe(
             (match) => {
+                this.chessLogic.move(this.getNotatedKey(sourceSan +  targetSan));
+                this.isThinking = false;
                 this.match = match;
                 this.newPositionSource.next(match.fenString);
                 this.moveMadeSource.next(sourceSan + targetSan);
@@ -59,9 +63,9 @@ export class MatchService {
 
     }
     playBestMove() {
+        this.isThinking = true;
         this.chessAI.getBestMove(this.match.id).subscribe(
             (bestMove) => {
-
                 this.makeMove(bestMove.substring(0,2), bestMove.substring(2,4));
             }
         );

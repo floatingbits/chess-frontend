@@ -5,6 +5,11 @@
         <form>
             <input #description type="text" >
             <button (click)="createMatch(description.value)">New Match</button>
+            <label for="whiteAI">White AI</label>
+            <input #whiteAI id="whiteAI" type="checkbox" [(ngModel)]="activeAIs.white" (change)="aiChanged()" [ngModelOptions]="{standalone: true}">
+            <label for="blackAI">Black AI</label>
+            <input #blackAI id="blackAI" type="checkbox" [(ngModel)]="activeAIs.black" (change)="aiChanged()" [ngModelOptions]="{standalone: true}">
         </form>
+
 </div>
 <board></board>
