@@ -22,18 +22,28 @@ export class MatchComponent implements OnInit {
         this.initialized = false;
         this.matchService.moveMade$.subscribe(
             (moveString) => {
-                if (this.isAI(this.matchService.getCurrentSide())) {
-                    this.matchService.playBestMove();
-                }
+                this.onMoveMade(moveString);
             }
         );
+    }
+    private onMoveMade(moveString) {
+        this.updateMatches(this.matchService.getCurrentMatch());
+        if (this.isAI(this.matchService.getCurrentSide())) {
+            this.matchService.playBestMove();
+        }
     }
     aiChanged() {
         if (this.isAI(this.matchService.getCurrentSide()) && !this.matchService.isAIThinking()) {
             this.matchService.playBestMove();
         }
     }
-
+    private updateMatches(match: Match) {
+        this.matches.forEach((m,i) => {
+            if (m.id == match.id) {
+                this.matches[i] = match;
+            }
+        });
+    }
     private isAI(sideString: string) {
         return this.activeAIs[sideString];
     }
