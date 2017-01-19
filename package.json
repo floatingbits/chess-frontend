@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple starter Angular2 project",
   "scripts": {
-    "build": "webpack --progress",
+    "build": "webpack --config webpack.prod.js --progress",
     "watch": "npm run build -- --watch",
     "server": "webpack-dev-server --config webpack.dev.js --inline --progress --port 3000 --content-base src",
     "start": "npm run server"
