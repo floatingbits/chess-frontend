@@ -160,7 +160,7 @@ export class BoardComponent implements OnInit, OnDestroy {
                 }
                 else {
                     let piece = {
-                        'char': PIECE_CONFIG[currentChar]
+                        'char': "<span>" + PIECE_CONFIG[currentChar] + "</span>"
                     };
                     this.rows[rowNumber].fields[fieldIndex].pieces = [
                         piece

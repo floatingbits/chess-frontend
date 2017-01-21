@@ -22,7 +22,12 @@ var webpackConfig = {
       {
         // your Angular Async Route paths relative to this root directory
       }
-    )
+    ),
+    new webpack.ProvidePlugin({
+          jQuery: 'jquery',
+          $: 'jquery',
+          jquery: 'jquery'
+      })
   ],
 
   module: {
@@ -37,7 +42,12 @@ var webpackConfig = {
         ]
       },
       { test: /\.css$/, loaders: 'style-loader!css-loader' },
-      { test: /\.html$/, loader: 'raw-loader' }
+      { test: /\.html$/, loader: 'raw-loader' },
+      {test: /\.png$/,  loader: "url-loader?limit=10000&mimetype=image/png" },
+      {test: /\.(woff|woff2)$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+      {test: /\.ttf$/,  loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
+      {test: /\.eot$/,  loader: "file-loader" },
+      {test: /\.svg$/,  loader: "url-loader?limit=10000&mimetype=image/svg+xml" }
     ]
   }
 

@@ -1,11 +1,41 @@
 .board .field {
+    position: relative;
     text-align: center;
-    width: 50px;
+    padding-bottom: 12.5%;
+    width: 12.5%
 }
-.board .row {
-    height: 50px;
+.board table {
+    width: 100%;
+}
+.board .piece {
+    position: absolute;
+    display: table-cell;
+    vertical-align: middle;
+    width: 80%;
+    left: 10%;
+    height: 80%;
+    top: 10%;
+    line-height: 166%;
+
+}
+.board {
+    font-size: 150%;
+}
+@media (min-width: 600px) {
+    .board {
+        font-size: 200%;
+    }
 }
 .field.black {
     background-color: #777;
 }
 
+.match {
+    margin: 5px;
+}
+.match span {
+    margin: 5px;
+}
+.match span.delete {
+    cursor: not-allowed;
+}

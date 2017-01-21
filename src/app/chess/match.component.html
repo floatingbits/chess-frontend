@@ -1,29 +1,44 @@
-<div class="match-chooser">
-    <div class="match" *ngFor="let match of matches">
-        <span (click)="playMatch(match)">{{match.description}}</span><span *ngIf="match!=matchService.getCurrentMatch()" (click)="deleteMatch(match)">X</span>
-    </div>
-    <form *ngIf="initialized">
-        <input #description type="text" >
-        <button (click)="createMatch(description.value)">New Match</button>
-        <fieldset>
-            <legend>AI</legend>
-            <label for="whiteAI">White AI</label>
-            <input #whiteAI id="whiteAI" type="checkbox" [(ngModel)]="activeAIs.white" (change)="aiChanged()" [ngModelOptions]="{standalone: true}">
-            <label for="blackAI">Black AI</label>
-            <input #blackAI id="blackAI" type="checkbox" [(ngModel)]="activeAIs.black" (change)="aiChanged()" [ngModelOptions]="{standalone: true}">
-        </fieldset>
 
-    </form>
+    <div class="match-chooser">
+        <div class="match btn btn-primary" *ngFor="let match of matches">
+            <span (click)="playMatch(match)">{{match.description}}</span><span class="delete" *ngIf="match!=matchService.getCurrentMatch()" (click)="deleteMatch(match)">X</span>
+        </div>
+        <form *ngIf="initialized">
+            <input #description type="text" >
+            <button class="btn" (click)="createMatch(description.value)">New Match</button>
+        </form>
+    </div>
+
+    <div class="row">
+        <form *ngIf="initialized" class="col-xs-6">
+            <fieldset>
+                <legend>AI</legend>
+                <label for="whiteAI">White AI</label>
+                <input #whiteAI id="whiteAI" type="checkbox" [(ngModel)]="activeAIs.white" (change)="aiChanged()" [ngModelOptions]="{standalone: true}">
+                <label for="blackAI">Black AI</label>
+                <input #blackAI id="blackAI" type="checkbox" [(ngModel)]="activeAIs.black" (change)="aiChanged()" [ngModelOptions]="{standalone: true}">
+            </fieldset>
+
+        </form>
+        <div *ngIf="matchService.getCurrentMatch()" class="match-state col-xs-6">
+            <h3>{{matchService.getCurrentMatch().description}}</h3>
+            <h4 *ngIf="matchService.isCheck()">CHECK</h4>
+            <h4 *ngIf="matchService.isCheckmate()">CHECKMATE</h4>
+            <p>Current Side: {{matchService.getCurrentSide()}}</p>
+            <p>Number of previous moves: {{matchService.getNumberOfMoves()}}</p>
+        </div>
+    </div>
     <div *ngIf="!initialized">
         <p>Loading Matches</p>
     </div>
 
-</div>
-<board ></board>
-<div *ngIf="matchService.getCurrentMatch()" class="match-state">
-    <h3>{{matchService.getCurrentMatch().description}}</h3>
-    <h4 *ngIf="matchService.isCheck()">CHECK</h4>
-    <h4 *ngIf="matchService.isCheckmate()">CHECKMATE</h4>
-    <p>Current Side: {{matchService.getCurrentSide()}}</p>
-    <p>Number of previous moves: {{matchService.getNumberOfMoves()}}</p>
-</div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 col-xs-offset-0">
+                <board ></board>
+            </div>
+        </div>
+
+
+
+
